@@ -226,7 +226,7 @@ export default function Home() {
       {/* Back to top End */}
 
 
-    <script src="script.js"></script>
+      <script src="/script.js"/>
     </>
   );
 }
