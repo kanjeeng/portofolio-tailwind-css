@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import ContactForm from "@/components/ContactForm";
 import Marquee from "@/components/magicui/marquee";
 import IconCloud from "@/components/magicui/icon-cloud";
+import Script from 'next/script';
 import Image from "next/image";
 
 // Marquee
@@ -515,7 +516,7 @@ export default function Home() {
       {/* Back to top End */}
 
 
-    <script src="/script.js"></script>
+    <Script src="/script.js" />
     </>
   );
 }
