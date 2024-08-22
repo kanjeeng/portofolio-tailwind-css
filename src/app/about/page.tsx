@@ -229,7 +229,7 @@ export default function About() {
       {/* Back to top End */}
 
 
-    <script src="script.js"></script>
+      <script src="/script.js"/>
     </>
   );
 }
