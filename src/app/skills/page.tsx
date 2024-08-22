@@ -209,7 +209,7 @@ export default function Skills() {
       {/* Back to top End */}
 
 
-    <script src="script.js"></script>
+      <script src="/script.js"/>
     </>
   );
 }
