@@ -1,5 +1,4 @@
 import RetroGrid from "@/components/magicui/retro-grid";
-import Script from 'next/script';
 import Image from "next/image";
 
 export default function Project() {
@@ -221,7 +220,7 @@ export default function Project() {
       {/* Back to top End */}
 
 
-    <Script src="/script.js" />
+      <script src="/script.js"/>
     </>
   );
 }
