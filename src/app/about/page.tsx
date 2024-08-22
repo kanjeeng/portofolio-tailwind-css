@@ -125,7 +125,7 @@ export default function About() {
         <div className="container">
           <div className="flex flex-wrap">
             <div className="w-full px-4 mb-12 text-slate-300 font-medium md:w-1/3">
-              <h2 className="font-bold text-4xl text-white mb-5">WPU</h2>
+              <h2 className="font-bold text-4xl text-white mb-5">KAND</h2>
               <h3 className="font-bold text-2xl mb-2">Hubungi Kami</h3>
               <p>dimasleny210@gmail.com</p>
               <p>Jl.KH Ahmad Dahlan Kav Angguran</p>
