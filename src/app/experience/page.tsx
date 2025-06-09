@@ -65,56 +65,104 @@ export default function Home() {
             <div className="max-w-xl mx-auto text-center mb-16">
               <h4 className="font-semibold text-lg text-primary mb-2">Pengalaman</h4>
               <h2 className="font-bold text-dark text-3xl mb-4 sm:text-4xl lg:text-5xl">Pengalaman Bermanfaat</h2>
-              <p className="font-medium text-md text-secondary md:text-lg">Sangat penting untuk kita memiliki banyak pengalaman manfaatnya dapat meningkatkan ilmu, Khususnya dibidang yang kita minati.</p>
+              <p className="font-medium text-md text-secondary md:text-lg">
+                Pengalaman adalah guru terbaik. Berbagai peran dan proyek yang saya jalani memberikan pemahaman yang lebih mendalam dalam bidang Teknologi Informasi, khususnya Cybersecurity, Networking dan Internet of Things.
+              </p>
             </div>
           </div>
 
           <div className="flex flex-wrap">
+
+
+            {/* MBC Lab */}
             <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                <img src="mbclab.png" alt="mbclab" className="w-40 md block mx-auto mt-6"/>
+                <img src="/mbclab.png" alt="mbclab" className="w-40 md block mx-auto mt-6" />
                 <div className="py-8 px-6">
                   <h3>
-                    <a href="https://www.linkedin.com/company/mbclaboratory/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">Multimedia Application, Big Data and Cybersecurity Laboratory</a>
+                    <a href="https://www.linkedin.com/company/mbclaboratory/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">MBC Laboratory</a>
                   </h3>
-                  <h2 className="text-dark font-semibold">Study Group</h2>
-                  <p className="font-medium text-base text-secondary mb-6"> Mempelajari keempat divisi dari MBC Laboratory baik itu Cybersecurity, GIS, Big Data dan GameTech.</p>
-                  <a href="https://www.linkedin.com/company/mbclaboratory/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4
-                  rounded-lg hover:opacity-80">Baca Selengkapnya</a>
+                  <h2 className="text-dark font-semibold">Research Assistant - Cybersecurity</h2>
+                  <p className="font-medium text-base text-secondary mb-6">
+                    Fokus pada pengujian keamanan perangkat IoT menggunakan protokol MQTT serta implementasi teknik kriptografi dan blockchain ringan untuk menjaga keamanan data.
+                  </p>
+                  <a href="https://www.linkedin.com/company/mbclaboratory/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Baca Selengkapnya</a>
                 </div>
               </div>
             </div>
+
+            {/* IoT Studio */}
             <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                <img src="cci.png" alt="cci" className="w-40 md block mx-auto mt-6"/>
+                <img src="/iot.png" alt="IoT Studio" className="w-40 md block mx-auto mt-6" />
                 <div className="py-8 px-6">
                   <h3>
-                    <a href="https://www.linkedin.com/company/cci-telkomuniversity/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">Central Computer Improvement (CCI)</a>
+                    <a href="https://iotstudio.labs.telkomuniversity.ac.id/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">IoT Studio Laboratory</a>
                   </h3>
-                  <h2 className="text-dark font-semibold">Network Engineer</h2>
-                  <p className="font-medium text-base text-secondary mb-6"> Mentoring mempelajari tentang jaringan mulai dari teori, infrastruktur, konfigurasi sampai pengamanan jaringan.</p>
-                  <a href="https://www.linkedin.com/company/cci-telkomuniversity/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4
-                  rounded-lg hover:opacity-80">Baca Selengkapnya</a>
+                  <h2 className="text-dark font-semibold">Koordinator IoT Cybersecurity Division</h2>
+                  <p className="font-medium text-base text-secondary mb-6">
+                    Meneliti dan mengembangkan komunikasi aman antar perangkat IoT melalui enkripsi dan evaluasi protokol MQTT secara mendalam, serta pengembangan microcontroller menggunakan NodeMCU.
+                  </p>
+                  <a href="https://iotstudio.labs.telkomuniversity.ac.id/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Baca Selengkapnya</a>
                 </div>
               </div>
             </div>
+
+            {/* Praktikum Asisten */}
             <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                <img src="ta.png" alt="ta" className="w-40 md block mx-auto mt-6"/>
+                <img src="/lab.png" alt="Informatics Lab" className="w-40 md block mx-auto mt-6" />
                 <div className="py-8 px-6">
                   <h3>
-                    <a href="https://www.linkedin.com/company/pt-telkom-akses/" target="_blank" className="block mb-10 font-semibold text-xl text-dark hover:text-primary">PT Telkom Akses Malang</a>
+                    <a href="https://informatics.labs.telkomuniversity.ac.id/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">Informatics Laboratory</a>
                   </h3>
-                  <h2 className="text-dark font-semibold">Tim Uji Terima</h2>
-                  <p className="font-medium text-base text-secondary mb-6">Magang selama 3 bulan menjadi Tim Uji Terima yang bertugas menginput evidensi hasil pengecekan jaringan customer.</p>
-                  <a href="https://www.linkedin.com/company/pt-telkom-akses/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4
-                  rounded-lg hover:opacity-80">Baca Selengkapnya</a>
+                  <h2 className="text-dark font-semibold">Asisten Praktikum Sistem Operasi</h2>
+                  <p className="font-medium text-base text-secondary mb-6">
+                    Membimbing praktikum Mata Kuliah Sistem Operasi dalam instalasi OS, manajemen memori dan proses, system call, serta pengembangan program paralel dalam sesi praktikum di lab.
+                  </p>
+                  <a href="https://informatics.labs.telkomuniversity.ac.id/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Baca Selengkapnya</a>
                 </div>
               </div>
             </div>
+
+            {/* PT Telkom Akses */}
+            <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
+                <img src="/ta.png" alt="Telkom Akses" className="w-40 md block mx-auto mt-6" />
+                <div className="py-8 px-6">
+                  <h3>
+                    <a href="https://www.linkedin.com/company/pt-telkom-akses/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">PT Telkom Akses Malang</a>
+                  </h3>
+                  <h2 className="text-dark font-semibold">Tim Uji Terima (Internship)</h2>
+                  <p className="font-medium text-base text-secondary mb-6">
+                    Melakukan pengecekan kualitas jaringan pelanggan dan menginput evidensi ke sistem. Mendukung tim melalui pengarsipan dan tugas administratif, serta menjaga kepatuhan terhadap prosedur perusahaan selama masa magang.
+                  </p>
+                  <a href="https://www.linkedin.com/company/pt-telkom-akses/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Baca Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+
+            {/* CCI */}
+            <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
+                <img src="/cci.png" alt="CCI" className="w-40 md block mx-auto mt-6" />
+                <div className="py-8 px-6">
+                  <h3>
+                    <a href="https://www.linkedin.com/company/cci-telkomuniversity/" target="_blank" className="block mb-3 font-semibold text-xl text-dark hover:text-primary">Computer Central Improvement (CCI)</a>
+                  </h3>
+                  <h2 className="text-dark font-semibold">DevOps Engineer & Vice Head Network Division</h2>
+                  <p className="font-medium text-base text-secondary mb-6">
+                    Bertugas dalam pengelolaan akses server yang aman, monitoring performa sistem, dan mendukung pengembangan software oleh tim. Juga memimpin tim jaringan dalam kegiatan event Study Group CCI Network.
+                  </p>
+                  <a href="https://www.linkedin.com/company/cci-telkomuniversity/" target="_blank" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-lg hover:opacity-80">Baca Selengkapnya</a>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
+
       {/* Pengalaman Section End */}
 
       {/* Footer Start */}

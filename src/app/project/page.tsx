@@ -67,45 +67,84 @@ export default function Project() {
           </div>
 
           <div className="w-full px-4 flex flex-wrap justify-center">
+            {/* Project 1: Landing Page MBC Laboratory */}
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <img src="project1.png" alt="Landing Page" width="w-full" />
+                <img src="/project1.png" alt="Landing Page" width="w-full" />
               </div>
-              <a href="https://docs.google.com/document/d/1QJvrfZS14Uqrfqd3IZITct4eLvtzSZ5mP-hjXj7ZgpQ/edit?usp=sharing" 
-              className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">Landing Page MBC Laboratory</a>
-              <p className="font-medium text-base text-secondary mt-3">Membuat Landing Page bertema profil MBC Laboratory menggunkan html & css, dan mendeploy nya menggunkan github. 
-                Menambahkan DNS serta layanan keamanan website menggunakan Cloudflare.
+              <a href="https://docs.google.com/document/d/1QJvrfZS14Uqrfqd3IZITct4eLvtzSZ5mP-hjXj7ZgpQ/edit?usp=sharing"
+                className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">
+                Landing Page MBC Laboratory
+              </a>
+              <p className="font-medium text-base text-secondary mt-3">
+                Membangun halaman profil MBC Laboratory menggunakan HTML dan CSS, dideploy di GitHub Pages serta diintegrasi dengan DNS dan keamanan menggunakan Cloudflare.
               </p>
             </div>
+
+            {/* Project 2: Docker Load Balancing */}
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <img src="project2.png" alt="Landing Page" width="w-full" />
+                <img src="/project2.png" alt="Docker Load Balancing" width="w-full" />
               </div>
-              <a href="https://docs.google.com/document/d/1NxTgkDAlaUeYNXAzjdPW0lHDT2S0yAv00Xml0_JM7x0/edit?usp=sharing" 
-              className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">Docker Load Balancing</a>
-              <p className="font-medium text-base text-secondary mt-3">Menjalankan Website dengan cara membagi beban server menggunkan 3 machine yang menjalankan layanan aplikasi yang sama, 
-                untuk menjaga avaibility suatu Website.  
+              <a href="https://docs.google.com/document/d/1NxTgkDAlaUeYNXAzjdPW0lHDT2S0yAv00Xml0_JM7x0/edit?usp=sharing"
+                className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">
+                Docker Load Balancing
+              </a>
+              <p className="font-medium text-base text-secondary mt-3">
+                Membuat sistem load balancing menggunakan Docker dengan tiga container aplikasi identik untuk meningkatkan ketersediaan layanan dan efisiensi server.
               </p>
             </div>
+
+            {/* Project 3: Named Data Network (NDN) */}
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <img src="project3.png" alt="Landing Page" width="w-full" />
+                <img src="/project3.png" alt="NDN" width="w-full" />
               </div>
-              <a href="https://docs.google.com/document/d/1Coyw2lrq39CiumGD33vM4yaKht06jbuP/edit?usp=sharing&ouid=117339854732040969619&rtpof=true&sd=true" 
-              className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">Named Data Network (NDN)</a>
-              <p className="font-medium text-base text-secondary mt-3">Membuatarsitektur jaringan masa depan yang mana user atau customer tidak perlu lagi memerlukan IP 
-                Address untuk mengakses sebuah konten pada internet, melainkan menggunakan Nama konten.
+              <a href="https://docs.google.com/document/d/1Coyw2lrq39CiumGD33vM4yaKht06jbuP/edit?usp=sharing"
+                className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">
+                Named Data Networking (NDN)
+              </a>
+              <p className="font-medium text-base text-secondary mt-3">
+                Membangun konsep jaringan masa depan berbasis konten, di mana pengguna dapat mengakses data menggunakan nama konten, bukan alamat IP.
               </p>
             </div>
+
+            {/* Project 4: Riset UI/UX Open Library */}
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <img src="project4.png" alt="Landing Page" width="w-full" />
+                <img src="/project4.png" alt="Open Library UIUX" width="w-full" />
               </div>
-              <a href="https://docs.google.com/document/d/1NLvnxPJxMJjfHtGZtKTw78_VbvphAo-0/edit?usp=sharing&ouid=117339854732040969619&rtpof=true&sd=true" 
-              className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">Riset UI/UX Open Library</a>
-              <p className="font-medium text-base text-secondary mt-3">Menganalisi permasalahan & kendala yang dialami pengguna, serta memperbaiki desain website Open Library Universitas Telkom.
+              <a href="https://docs.google.com/document/d/1NLvnxPJxMJjfHtGZtKTw78_VbvphAo-0/edit?usp=sharing"
+                className="font-semibold text-xl text-dark mt-5 mb-3" target="_blank">
+                Riset UI/UX Open Library Tel-U
+              </a>
+              <p className="font-medium text-base text-secondary mt-3">
+                Melakukan evaluasi desain dan pengalaman pengguna pada sistem Open Library Telkom University dan memberikan solusi desain berbasis Figma.
               </p>
             </div>
+
+            {/* Project 5: Secure MQTT IoT Communication */}
+            <div className="mb-12 p-4 md:w-1/2">
+              <div className="rounded-md shadow-md overflow-hidden">
+                <img src="/project5.png" alt="IoT Security" width="w-full" />
+              </div>
+              <span className="font-semibold text-xl text-dark mt-5 mb-3 block">Secure MQTT Communication for IoT</span>
+              <p className="font-medium text-base text-secondary mt-3">
+                Riset keamanan komunikasi perangkat IoT-Based GPS Trackers dengan menerapkan protokol MQTT dan enkripsi menggunakan kriptografi ASCON Lightweight Cryptography serta pengembangan sistem blockchain ringan untuk autentikasi pesan.
+              </p>
+            </div>
+
+            {/* Project 6: ITCOURSE Platform (Laravel) */}
+            <div className="mb-12 p-4 md:w-1/2">
+              <div className="rounded-md shadow-md overflow-hidden">
+                <img src="/project6.png" alt="ITCOURSE Laravel" width="w-full" />
+              </div>
+              <span className="font-semibold text-xl text-dark mt-5 mb-3 block">ITCOURSE E-Learning Platform (Laravel)</span>
+              <p className="font-medium text-base text-secondary mt-3">
+                Platform kami menyediakan pengalaman e-learning yang mudah diakses dan fleksibel, dengan pembelajaran berbasis video. Dilengkapi dengan quiz untuk menguji peserta, proyek ini bertujuan meningkatkan pemahaman dan mendukung keberhasilan sertifikasi. Keamanan dan privasi data pengguna menjadi prioritas utama kami.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
