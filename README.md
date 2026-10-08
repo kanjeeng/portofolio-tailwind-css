@@ -1,4 +1,3 @@
-```markdown
 # Kanjeng Dhimas Cahyoherlina — DevOps & Security Portfolio
 
 A personal portfolio website for **Kanjeng Dhimas Cahyoherlina**, a DevOps, Cloud Infrastructure & Security Engineer. The site showcases professional experience, technical skills, and project work across automation, cloud infrastructure, containerization, and network security — built as a fast, modern, single-codebase Next.js application.
