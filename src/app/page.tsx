@@ -163,7 +163,8 @@ export default function Home() {
                 </span>
               </h1>
               <h2 className="font-semibold text-secondary text-lg mb-6 lg:text-2xl">
-                Kanjeng Dhimas — DevOps &amp; Cloud Security Specialist
+                DevOps · Cloud Infrastructure{" "}
+                <span className="text-dark">&amp; Security Engineer</span>
               </h2>
               <p className="font-medium text-secondary mb-10 leading-relaxed max-w-xl lg:text-lg">
                 I design and automate{" "}
