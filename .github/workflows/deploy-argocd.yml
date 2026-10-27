@@ -1,0 +1,60 @@
+name: 🚀 Build & Update GitOps Tag
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-and-push:
+    name: Build Image & Trigger GitOps
+    runs-on: ubuntu-latest
+    environment: Staging # Membaca Secrets & Variables dari Environment Staging
+
+    steps:
+      - name: 📦 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🏷 Tentukan Metadata Build
+        id: meta
+        run: |
+          echo "short_sha=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
+
+      - name: 🔐 Login ke Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: 🛠 Build dan Push Image ke Docker Hub
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ vars.DOCKERHUB_USERNAME }}/portofolio-tailwind-css:${{ steps.meta.outputs.short_sha }}
+            ${{ vars.DOCKERHUB_USERNAME }}/portofolio-tailwind-css:latest
+          build-args: |
+            RESEND_API_KEY=${{ secrets.RESEND_API_KEY }}
+            CONTACT_TO_EMAIL=${{ vars.CONTACT_TO_EMAIL }}
+            APP_VERSION=${{ steps.meta.outputs.short_sha }}
+
+      - name: 🔄 Update Tag di Repo GitOps
+        env:
+          GITOPS_TOKEN: ${{ secrets.GITOPS_TOKEN }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Clone repo GitOps menggunakan token
+          git clone https://x-access-token:${GITOPS_TOKEN}@github.com/kanjeeng/gitops-argocd-lab.git gitops-repo
+          cd gitops-repo/apps/portofolio/overlays/dev
+          
+          # Update newTag pada kustomization.yaml
+          sed -i "s/newTag:.*/newTag: ${{ steps.meta.outputs.short_sha }}/g" kustomization.yaml
+          
+          # Commit & Push ke repo GitOps
+          git add kustomization.yaml
+          git commit -m "chore(portofolio): update image tag to ${{ steps.meta.outputs.short_sha }}"
+          git push origin main
