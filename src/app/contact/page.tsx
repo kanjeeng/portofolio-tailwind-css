@@ -3,6 +3,7 @@ import ContactForm from "@/components/ContactForm";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import Script from "next/script";
 
 export default function Contact() {
   return (
@@ -37,7 +38,7 @@ export default function Contact() {
 
       <Footer />
       <BackToTop />
-      <script src="/script.js" />
+      <Script src="/script.js" strategy="afterInteractive" />
     </>
   );
 }

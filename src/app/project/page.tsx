@@ -2,6 +2,7 @@ import RetroGrid from "@/components/magicui/retro-grid";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import Script from "next/script";
 
 export default function Project() {
   return (
@@ -42,7 +43,7 @@ export default function Project() {
 
       <Footer />
       <BackToTop />
-      <script src="/script.js" />
+      <Script src="/script.js" strategy="afterInteractive" />
     </>
   );
 }

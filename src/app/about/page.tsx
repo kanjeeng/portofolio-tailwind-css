@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import SocialLinks from "@/components/SocialLinks";
+import Script from "next/script";
 
 export default function About() {
   return (
@@ -66,7 +67,7 @@ export default function About() {
 
       <Footer />
       <BackToTop />
-      <script src="/script.js" />
+      <Script src="/script.js" strategy="afterInteractive" />
     </>
   );
 }

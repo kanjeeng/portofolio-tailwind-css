@@ -4,6 +4,7 @@ import SkillCategoryGrid from "@/components/SkillCategoryGrid";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
+import Script from "next/script";
 
 // icon-Cloud — DevOps toolset
 const slugs = [
@@ -118,7 +119,7 @@ export default function Skills() {
 
       <Footer />
       <BackToTop />
-      <script src="/script.js" />
+      <Script src="/script.js" strategy="afterInteractive" />
     </>
   );
 }
