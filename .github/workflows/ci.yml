@@ -183,13 +183,15 @@ jobs:
     steps:
       - name: Update newTag di overlay
         env:
-          GITOPS_TOKEN: ${{ secrets.GITOPS_TOKEN }}
           TAG: ${{ needs.build_scan_push.outputs.tag }}
           ENV_NAME: ${{ github.ref_name == 'main' && 'staging' || 'dev' }}
         run: |
           git config --global user.name  "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@://github.com"
-          git clone https://x-access-token:${GITOPS_TOKEN}@://github.com gitops
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # TAMBAHKAN SECRETS GLOBAL LANGSUNG DI SINI MENGGUNAKAN KURUNG KURAWAL ${{ }}
+          git clone https://x-access-token:${{ secrets.GITOPS_TOKEN }}@://github.com gitops
+          
           cd gitops/apps/portofolio/overlays/${ENV_NAME}
           yq -i '.images[0].newTag = strenv(TAG)' kustomization.yaml
           git add kustomization.yaml
