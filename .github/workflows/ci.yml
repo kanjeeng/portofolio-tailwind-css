@@ -189,13 +189,13 @@ jobs:
           GITOPS_TOKEN: ${{ secrets.GITOPS_TOKEN }}
         run: |
           git config --global user.name  "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.email "github-actions[bot]@://github.com"
           
-          # PASTIKAN BARIS DI BAWAH INI TERTULIS REPOTARGET SECARA UTUH DAN BENAR
+          # BERIKUT ADALAH KODE PERBAIKAN TARGET URL CLONE YANG BENAR (SALIN INI)
           git clone "https://x-access-token:${GITOPS_TOKEN}@://github.com" gitops
           
           cd gitops/apps/portofolio/overlays/${ENV_NAME}
-          yq -i '.images.newTag = strenv(TAG)' kustomization.yaml
+          yq -i '.images[0].newTag = strenv(TAG)' kustomization.yaml
           git add kustomization.yaml
           git commit -m "chore(portofolio): ${ENV_NAME} -> ${TAG} (src ${GITHUB_SHA})"
           for i in 1 2 3; do
