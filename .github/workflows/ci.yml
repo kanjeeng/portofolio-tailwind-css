@@ -1,8 +1,5 @@
 name: CI - DevSecOps Portofolio
 
-# develop  -> build, scan, push image, update overlay DEV  (otomatis)
-# main     -> build, scan, push image, update overlay STAGING (otomatis)
-# PR       -> hanya gerbang kualitas/keamanan, TIDAK push image
 on:
   pull_request:
     branches: [develop, main]
@@ -38,7 +35,7 @@ jobs:
       - run: npm run lint
       - run: npx tsc --noEmit
 
-  # 2. SCA - kerentanan dependensi
+  # 2. SCA - Kerentanan dependensi produksi dengan toleransi arsitektur
   sca:
     name: SCA (npm audit)
     runs-on: ubuntu-latest
@@ -61,7 +58,7 @@ jobs:
             exit 0
           }
 
-  # 3. Secret scan - seluruh riwayat commit
+  # 3. Secret scan - Memindai seluruh riwayat commit dari secret bocor
   secret_scan:
     name: Secret Scan (Gitleaks)
     runs-on: ubuntu-latest
@@ -75,7 +72,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   # 4. SAST + Quality Gate (SonarQube di EC2)
-  # SonarQube Community umumnya hanya menganalisis branch utama, jadi hanya saat push.
   sonarqube:
     name: SAST (SonarQube + Quality Gate)
     if: github.event_name != 'pull_request'
@@ -94,11 +90,10 @@ jobs:
           args: >
             -Dsonar.qualityGate.wait=true
 
-  # 5. Build -> scan -> smoke test -> (baru) push. Image yang di-push = image yang sudah dipindai.
+  # 5. Build lokal -> Scan keamanan kontainer -> k6 Smoke Test -> Push Image Resmi
   build_scan_push:
     name: Build, Scan (Trivy), k6 Smoke, Push
     needs: [lint, sca, secret_scan, sonarqube]
-    # sonarqube boleh di-skip (PR), tetapi tidak boleh gagal
     if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -106,14 +101,11 @@ jobs:
       tag: ${{ steps.meta.outputs.sha7 }}
     steps:
       - uses: actions/checkout@v4
-
       - id: meta
         run: |
           echo "sha7=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
           echo "image=${{ vars.DOCKERHUB_USERNAME }}/${IMAGE_NAME}" >> "$GITHUB_OUTPUT"
-
       - uses: docker/setup-buildx-action@v3
-
       - name: Build image (lokal, belum di-push)
         uses: docker/build-push-action@v6
         with:
@@ -125,7 +117,6 @@ jobs:
             APP_VERSION=${{ steps.meta.outputs.sha7 }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
       - name: Trivy - scan image (HIGH/CRITICAL + secret)
         uses: aquasecurity/trivy-action@v0.35.0
         with:
@@ -135,7 +126,6 @@ jobs:
           scanners: vuln,secret
           ignore-unfixed: true
           exit-code: "1"
-
       - name: Trivy - scan Dockerfile (misconfig)
         uses: aquasecurity/trivy-action@v0.35.0
         with:
@@ -143,14 +133,12 @@ jobs:
           scan-ref: .
           severity: HIGH,CRITICAL
           exit-code: "1"
-
       - name: Trivy - SBOM (CycloneDX)
         uses: aquasecurity/trivy-action@v0.35.0
         with:
           image-ref: ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.sha7 }}
           format: cyclonedx
           output: sbom.cdx.json
-
       - name: Jalankan container untuk smoke test
         run: |
           docker run -d --name app -p ${APP_PORT}:3000 \
@@ -161,11 +149,9 @@ jobs:
             sleep 2
           done
           docker logs app; exit 1
-
       - uses: grafana/setup-k6-action@v1
       - name: k6 smoke test
         run: k6 run --summary-export=k6-summary.json -e BASE_URL=http://127.0.0.1:${APP_PORT} loadtest/smoke.js
-
       - name: Unggah laporan (SBOM + k6)
         if: always()
         uses: actions/upload-artifact@v4
@@ -174,19 +160,17 @@ jobs:
           path: |
             sbom.cdx.json
             k6-summary.json
-
       - name: Login Docker Hub
         if: github.event_name == 'push'
         uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Push image (tag SHA immutable, tanpa :latest)
         if: github.event_name == 'push'
         run: docker push ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.sha7 }}
 
-  # 6. Update repo GitOps -> ArgoCD yang menarik & deploy
+  # 6. Update manifest tag di repo GitOps via Kustomize (yq)
   update_gitops:
     name: Update GitOps (${{ github.ref_name == 'main' && 'staging' || 'dev' }})
     if: github.event_name == 'push'
@@ -204,8 +188,8 @@ jobs:
           ENV_NAME: ${{ github.ref_name == 'main' && 'staging' || 'dev' }}
         run: |
           git config --global user.name  "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git clone https://x-access-token:${GITOPS_TOKEN}@github.com/kanjeeng/gitops-argocd-lab.git gitops
+          git config --global user.email "github-actions[bot]@://github.com"
+          git clone https://x-access-token:${GITOPS_TOKEN}@://github.com gitops
           cd gitops/apps/portofolio/overlays/${ENV_NAME}
           yq -i '.images[0].newTag = strenv(TAG)' kustomization.yaml
           git add kustomization.yaml

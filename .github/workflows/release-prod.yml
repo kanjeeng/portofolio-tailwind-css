@@ -1,7 +1,5 @@
 name: Release - Promote ke Production
 
-# Dipicu dengan membuat tag rilis dari commit di main yang sudah lolos staging:
-#   git tag -a v1.0.0 -m "Release v1.0.0" && git push origin v1.0.0
 on:
   push:
     tags: ["v*.*.*"]
@@ -16,29 +14,23 @@ jobs:
   promote:
     name: Promote image (tanpa rebuild) + PR ke GitOps
     runs-on: ubuntu-latest
-    # Environment "production" dengan Required reviewers = GATE APPROVAL MANUAL
     environment: production
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - name: Pastikan tag berasal dari main
         run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
-
       - id: meta
-        run: |
+        run: |          
           echo "sha7=${GITHUB_SHA::7}" >> "$GITHUB_OUTPUT"
           echo "image=${{ vars.DOCKERHUB_USERNAME }}/${IMAGE_NAME}" >> "$GITHUB_OUTPUT"
-
       - uses: docker/login-action@v3
         with:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Pastikan image hasil pipeline main ada
         run: docker buildx imagetools inspect ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.sha7 }}
-
       - name: Re-scan Trivy saat promosi (CVE baru bisa muncul setelah build)
         uses: aquasecurity/trivy-action@v0.35.0
         with:
@@ -47,21 +39,19 @@ jobs:
           scanners: vuln
           ignore-unfixed: true
           exit-code: "1"
-
       - name: Beri tag versi (image sama, digest sama)
         run: |
           docker buildx imagetools create \
             -t ${{ steps.meta.outputs.image }}:${GITHUB_REF_NAME} \
             ${{ steps.meta.outputs.image }}:${{ steps.meta.outputs.sha7 }}
-
       - name: Buka Pull Request ke repo GitOps (overlay prod)
         env:
           GH_TOKEN: ${{ secrets.GITOPS_TOKEN }}
           TAG: ${{ github.ref_name }}
         run: |
           git config --global user.name  "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git clone https://x-access-token:${GH_TOKEN}@github.com/kanjeeng/gitops-argocd-lab.git gitops
+          git config --global user.email "github-actions[bot]@://github.com"
+          git clone https://x-access-token:${GH_TOKEN}@://github.com gitops
           cd gitops
           git checkout -b release/portofolio-${TAG}
           yq -i '.images[0].newTag = strenv(TAG)' apps/portofolio/overlays/prod/kustomization.yaml
