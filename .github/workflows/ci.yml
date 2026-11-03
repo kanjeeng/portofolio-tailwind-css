@@ -91,7 +91,6 @@ jobs:
           args: >
             -Dsonar.meta.analysis=true
 
-
   # 5. Build lokal -> Scan keamanan kontainer -> k6 Smoke Test -> Push Image Resmi
   build_scan_push:
     name: Build, Scan (Trivy), k6 Smoke, Push
