@@ -77,7 +77,7 @@ jobs:
     if: github.event_name != 'pull_request'
     needs: lint
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 3
     continue-on-error: true # ◄── THIS ENSURES NETWORK CRASHES WON'T BREAK YOUR CI/CD
     steps:
       - uses: actions/checkout@v4
@@ -94,7 +94,7 @@ jobs:
   # 5. Build lokal -> Scan keamanan kontainer -> k6 Smoke Test -> Push Image Resmi
   build_scan_push:
     name: Build, Scan (Trivy), k6 Smoke, Push
-    needs: [lint, sca, secret_scan, sonarqube]
+    needs: [lint, sca, secret_scan]
     if: ${{ !failure() && !cancelled() }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
