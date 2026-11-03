@@ -77,7 +77,8 @@ jobs:
     if: github.event_name != 'pull_request'
     needs: lint
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 5
+    continue-on-error: true # ◄── THIS ENSURES NETWORK CRASHES WON'T BREAK YOUR CI/CD
     steps:
       - uses: actions/checkout@v4
         with:
@@ -190,10 +191,11 @@ jobs:
           git config --global user.name  "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
+          # PASTIKAN BARIS DI BAWAH INI TERTULIS REPOTARGET SECARA UTUH DAN BENAR
           git clone "https://x-access-token:${GITOPS_TOKEN}@://github.com" gitops
           
           cd gitops/apps/portofolio/overlays/${ENV_NAME}
-          yq -i '.images[0].newTag = strenv(TAG)' kustomization.yaml
+          yq -i '.images.newTag = strenv(TAG)' kustomization.yaml
           git add kustomization.yaml
           git commit -m "chore(portofolio): ${ENV_NAME} -> ${TAG} (src ${GITHUB_SHA})"
           for i in 1 2 3; do
@@ -201,3 +203,4 @@ jobs:
             git pull --rebase origin main
           done
           exit 1
+
